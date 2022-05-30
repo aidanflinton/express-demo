@@ -14,7 +14,7 @@ import '../App.css';
 
 function DataDisplay (props) {
     const like = (id) => {
-        axios.post('http://localhost:9000/demo/like', {
+        axios.put('http://localhost:9000/demo/like', {
             id:id
         })
         .then((res) => console.log(res.data))

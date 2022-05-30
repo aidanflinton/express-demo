@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require("../firebase");
 
-const { doc, addDoc, collection, getDocs, updateDoc, increment } = require('firebase/firestore');
+const { doc, addDoc, collection, getDocs, updateDoc, deleteDoc, increment } = require('firebase/firestore');
 
 const addMessage = (message) => {
 
@@ -30,17 +30,22 @@ router.post('/post', (req, res, next) => {
     })
 
     .then(console.log(req.body))
-    .then(res.send(req.body))
+    res.send(req.body)
 });
 
 router.put('/like', (req, res, next) => {
+    updateDoc(doc(db, "messages", req.body.id), {
+      likes: increment(1)  // increment is a built-in firestore function that increments by the number specified
+    })
 
-    console.log(req.body)
-    .then(res.send('Received a like request'))
+    .then(console.log(req.body))
+    res.send('Received a like request')
 });
 
 router.delete('/delete', (req, res, next) => {
-    console.log(req.body);
+    //deleteDoc(doc(db, 'messages', req.body.id))
+
+    console.log(req.query);
     res.send('Received a delete request');
 });
 
