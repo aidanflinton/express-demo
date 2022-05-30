@@ -4,18 +4,6 @@ const db = require("../firebase");
 
 const { doc, addDoc, collection, getDocs, updateDoc, deleteDoc, increment } = require('firebase/firestore');
 
-const addMessage = (message) => {
-
-        const newMessage = {
-            user: message.name,
-            message: message.msg,
-            likes: 0,
-            msgID: 3,
-        }
-        
-        addDoc(collection(db, "messages"), newMessage) // add the new response 
-    }
-
 router.get("/info", async (req, res, next) => {
   const allDocData = []
   const docs = await getDocs(collection(db, "messages"))
@@ -24,9 +12,10 @@ router.get("/info", async (req, res, next) => {
 });
 
 router.post('/post', (req, res, next) => {
-    db.collection('messages').add({
-        user: req.body.user,
-        message: req.body.msg
+    addDoc(collection(db, "messages"), {
+        user:req.body.name,
+        message: req.body.message,
+        likes: 0
     })
 
     .then(console.log(req.body))
@@ -43,7 +32,7 @@ router.put('/like', (req, res, next) => {
 });
 
 router.delete('/delete', (req, res, next) => {
-    //deleteDoc(doc(db, 'messages', req.body.id))
+    //deleteDoc(doc(db, 'messages', req.query.id))
 
     console.log(req.query);
     res.send('Received a delete request');

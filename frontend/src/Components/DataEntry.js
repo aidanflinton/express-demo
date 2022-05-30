@@ -9,8 +9,8 @@ const DataEntry = () => {
 
     const post = (post) => {
         axios.post('http://localhost:9000/demo/post', {
-            user: post.name,
-            message: post.msg
+            name: post.name,
+            msg: post.msg
         })
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err))
@@ -40,6 +40,7 @@ const DataEntry = () => {
       <Grid container alignItems="center" justify="center" direction="column">
         <Grid item>
           <TextField
+            size="small"
             id="name-input"
             name="name"
             label="User name"
@@ -48,6 +49,7 @@ const DataEntry = () => {
             onChange={handleInputChange}
           />
           <TextField
+            size="small"
             id="msg-input"
             name="msg"
             label="Message"
@@ -55,10 +57,11 @@ const DataEntry = () => {
             value={formValues.msg}
             onChange={handleInputChange}
           />
+            <Button variant="contained" color="primary" type="submit">
+            Add Event
+            </Button>
         </Grid>
-        <Button variant="contained" color="primary" type="submit">
-          Add Event
-        </Button>
+        
       </Grid>
     </form>
   );

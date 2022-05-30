@@ -1,4 +1,13 @@
 .App {
+  background-color: #abbdc4;
+  text-align: center;
+}
+
+.Head {
+  background-color: #2e6171;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.67em;
   text-align: center;
 }
 

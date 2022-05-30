@@ -1,5 +1,4 @@
 import './App.css';
-import axios from 'axios'
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import DataEntry from './Components/DataEntry';
@@ -16,10 +15,16 @@ function App() {
   }, [])
 
   return (
+    <>
+    <div className="Head">
+      Messageboard
+    </div>
     <div className="App">
       <DataEntry />
+      <p></p>
       {info && <DataDisplay messages={info}/> }
     </div>
+    </>
   );
 }
 
